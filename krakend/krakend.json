@@ -1,0 +1,234 @@
+{
+  "$schema": "https://www.krakend.io/schema/krakend.json",
+  "version": 3,
+  "name": "TemanBumil - API Gateway",
+  "timeout": "15000ms",
+  "cache_ttl": "600s",
+  "output_encoding": "no-op",
+  "port": 8080,
+  "read_timeout": "10s",
+  "write_timeout": "15s",
+  "idle_timeout": "180s",
+  "read_header_timeout": "5s",
+  "extra_config": {
+    "qos/ratelimit/service": {
+      "max_rate": 20000,
+      "every": "1m",
+      "capacity": 1000,
+      "client_max_rate": 5,
+      "key": "",
+      "strategy": "ip",
+      "client_capacity": 20
+    }
+  },
+  "endpoints": [
+    {
+      "endpoint": "/auth-svc",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3001"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/auth-svc/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3001"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/auth-svc/healthz",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/healthz",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3001"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/auth-svc/api/v1/login",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/v1/login",
+          "method": "POST",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3001"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/auth-svc/api/v1/refresh",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/v1/refresh",
+          "method": "POST",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3001"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/community-svc",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3002"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/community-svc/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3002"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/community-svc/healthz",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/healthz",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3002"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/community-svc/api/v1/communities",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/v1/communities",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3002"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/community-svc/api/v1/communities/{community_id}",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/v1/communities/{community_id}",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3002"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/community-svc/api/v1/communities/{community_id}/members",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/api/v1/communities/{community_id}/members",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3002"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/member-svc",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3003"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/member-svc/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3003"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/member-svc/healthz",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/healthz",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3003"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/member-svc/api/v1/members",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/healthz/api/v1/members",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3003"]
+        }
+      ]
+    },
+    {
+      "endpoint": "/member-svc/api/v1/members/{member_id}",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "url_pattern": "/healthz/api/v1/members/{member_id}",
+          "method": "GET",
+          "encoding": "no-op",
+          "host": ["http://host.docker.internal:3003"]
+        }
+      ]
+    }
+  ]
+}
