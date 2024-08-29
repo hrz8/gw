@@ -21,6 +21,7 @@ var (
 )
 
 type JWK struct {
+	Alg string `json:"alg"`
 	Kty string `json:"kty"`
 	Kid string `json:"kid"`
 	Use string `json:"use"`
@@ -50,16 +51,22 @@ func main() {
 
 		aud := r.Header.Get("X-Audience-Id")
 		if aud == "" {
-			aud = "tb-app"
+			aud = "https://hub.temanbumil.com"
 		}
 
-		token := jwt.New(jwt.SigningMethodRS256)
-		claims := token.Claims.(jwt.MapClaims)
-		claims["iss"] = "tb-auth-svc"
-		claims["iat"] = time.Now().Unix()
-		claims["exp"] = time.Now().Add(time.Hour * 1).Unix()
-		claims["aud"] = aud
-		claims["sub"] = "123"
+		kid := os.Getenv("JWKS_KID")
+
+		claims := jwt.MapClaims{
+			"iss": "tb-auth-svc",
+			"kid": kid,
+			"iat": time.Now().Unix(),
+			"exp": time.Now().Add(time.Hour * 1).Unix(),
+			"aud": aud,
+			"sub": "123",
+		}
+
+		token := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
+		token.Header["kid"] = kid
 
 		tokenString, err := token.SignedString(privKey)
 		if err != nil {
@@ -114,6 +121,7 @@ func getJwks() (*JWKS, error) {
 	}
 
 	jwk := JWK{
+		Alg: "RS256",
 		Kty: "RSA",
 		Kid: kid,
 		Use: "sig",

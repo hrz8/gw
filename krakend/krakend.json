@@ -31,7 +31,9 @@
           "url_pattern": "/",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3001"]
+          "host": [
+            "http://host.docker.internal:3001"
+          ]
         }
       ]
     },
@@ -44,7 +46,9 @@
           "url_pattern": "/",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3001"]
+          "host": [
+            "http://host.docker.internal:3001"
+          ]
         }
       ]
     },
@@ -57,7 +61,9 @@
           "url_pattern": "/healthz",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3001"]
+          "host": [
+            "http://host.docker.internal:3001"
+          ]
         }
       ]
     },
@@ -70,7 +76,9 @@
           "url_pattern": "/api/v1/login",
           "method": "POST",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3001"]
+          "host": [
+            "http://host.docker.internal:3001"
+          ]
         }
       ]
     },
@@ -83,7 +91,9 @@
           "url_pattern": "/api/v1/refresh",
           "method": "POST",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3001"]
+          "host": [
+            "http://host.docker.internal:3001"
+          ]
         }
       ]
     },
@@ -96,7 +106,9 @@
           "url_pattern": "/",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3002"]
+          "host": [
+            "http://host.docker.internal:3002"
+          ]
         }
       ]
     },
@@ -109,7 +121,9 @@
           "url_pattern": "/",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3002"]
+          "host": [
+            "http://host.docker.internal:3002"
+          ]
         }
       ]
     },
@@ -122,7 +136,9 @@
           "url_pattern": "/healthz",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3002"]
+          "host": [
+            "http://host.docker.internal:3002"
+          ]
         }
       ]
     },
@@ -135,7 +151,9 @@
           "url_pattern": "/api/v1/communities",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3002"]
+          "host": [
+            "http://host.docker.internal:3002"
+          ]
         }
       ]
     },
@@ -143,12 +161,28 @@
       "endpoint": "/community-svc/api/v1/communities/{community_id}",
       "method": "GET",
       "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://hub.temanbumil.com"
+          ],
+          "jwk_url": "http://host.docker.internal:3001/.well-known/jwks.json",
+          "cache": false,
+          "disable_jwk_security": true,
+          "operation_debug": true
+        }
+      },
+      "concurrent_calls": 1,
+      "input_headers": ["Authorization"],
       "backend": [
         {
           "url_pattern": "/api/v1/communities/{community_id}",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3002"]
+          "host": [
+            "http://host.docker.internal:3002"
+          ]
         }
       ]
     },
@@ -156,12 +190,28 @@
       "endpoint": "/community-svc/api/v1/communities/{community_id}/members",
       "method": "GET",
       "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://hub.temanbumil.com"
+          ],
+          "jwk_url": "http://host.docker.internal:3001/.well-known/jwks.json",
+          "cache": false,
+          "disable_jwk_security": true,
+          "operation_debug": true
+        }
+      },
+      "concurrent_calls": 1,
+      "input_headers": ["Authorization"],
       "backend": [
         {
           "url_pattern": "/api/v1/communities/{community_id}/members",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3002"]
+          "host": [
+            "http://host.docker.internal:3002"
+          ]
         }
       ]
     },
@@ -174,7 +224,9 @@
           "url_pattern": "/",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3003"]
+          "host": [
+            "http://host.docker.internal:3003"
+          ]
         }
       ]
     },
@@ -187,7 +239,9 @@
           "url_pattern": "/",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3003"]
+          "host": [
+            "http://host.docker.internal:3003"
+          ]
         }
       ]
     },
@@ -200,7 +254,9 @@
           "url_pattern": "/healthz",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3003"]
+          "host": [
+            "http://host.docker.internal:3003"
+          ]
         }
       ]
     },
@@ -208,12 +264,28 @@
       "endpoint": "/member-svc/api/v1/members",
       "method": "GET",
       "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://hub.temanbumil.com"
+          ],
+          "jwk_url": "http://host.docker.internal:3001/.well-known/jwks.json",
+          "cache": false,
+          "disable_jwk_security": true,
+          "operation_debug": true
+        }
+      },
+      "concurrent_calls": 1,
+      "input_headers": ["Authorization"],
       "backend": [
         {
           "url_pattern": "/healthz/api/v1/members",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3003"]
+          "host": [
+            "http://host.docker.internal:3003"
+          ]
         }
       ]
     },
@@ -221,12 +293,28 @@
       "endpoint": "/member-svc/api/v1/members/{member_id}",
       "method": "GET",
       "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "audience": [
+            "https://hub.temanbumil.com"
+          ],
+          "jwk_url": "http://host.docker.internal:3001/.well-known/jwks.json",
+          "cache": false,
+          "disable_jwk_security": true,
+          "operation_debug": true
+        }
+      },
+      "concurrent_calls": 1,
+      "input_headers": ["Authorization"],
       "backend": [
         {
           "url_pattern": "/healthz/api/v1/members/{member_id}",
           "method": "GET",
           "encoding": "no-op",
-          "host": ["http://host.docker.internal:3003"]
+          "host": [
+            "http://host.docker.internal:3003"
+          ]
         }
       ]
     }
